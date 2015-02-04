@@ -221,8 +221,9 @@ if ($do_show == 'showentries') {
                     //userpicture and link to the profilepage
                     $fullname_url = $CFG->wwwroot.'/user/view.php?id='.$student->id.'&amp;course='.$course->id;
                     $profilelink = '<strong><a href="'.$fullname_url.'">'.fullname($student).'</a></strong>';
-                    $data = array ($OUTPUT->user_picture($student, array('courseid'=>$course->id)), $profilelink);
-
+                    // Modified by Renaat
+                    //$data = array ($OUTPUT->user_picture($student, array('courseid'=>$course->id)), $profilelink);
+                    $data = array ($OUTPUT->user_picture($student, array('courseid'=>1)), $profilelink);
                     //link to the entry of the user
                     $params = array('feedback'=>$feedback->id,
                                     'userid'=>$student->id,

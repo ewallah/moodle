@@ -154,14 +154,17 @@ class feedback_item_textarea extends feedback_item_base {
             echo $itemnr.'&nbsp;('.$item->label.') '.$item->name;
             echo '</th></tr>';
             foreach ($values as $value) {
-                echo '<tr>';
-                echo '<td valign="top" align="left">';
-                echo '-&nbsp;&nbsp;';
-                echo '</td>';
-                echo '<td align="left" valign="top">';
-                echo str_replace("\n", '<br />', $value->value);
-                echo '</td>';
-                echo '</tr>';
+                // Added by Renaat
+                if ($value->value != '') {
+                    echo '<tr>';
+                    echo '<td valign="top" align="left">';
+                    echo '-&nbsp;&nbsp;';
+                    echo '</td>';
+                    echo '<td align="left" valign="top">';
+                    echo str_replace("\n", '<br />', $value->value);
+                    echo '</td>';
+                    echo '</tr>';
+                }
             }
         }
     }

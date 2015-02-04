@@ -74,6 +74,8 @@ class filter_activitynames extends moodle_text_filter {
                             'name' => $cm->name,
                             'url' => $cm->url,
                             'id' => $cm->id,
+                            // Added by Renaat
+                            'modname' => $cm->modname,
                             'namelen' => -strlen($cm->name), // Negative value for reverse sorting.
                         );
                     }
@@ -87,9 +89,19 @@ class filter_activitynames extends moodle_text_filter {
                     $entitisedname  = s($currentname);
                     // Avoid empty or unlinkable activity names.
                     if (!empty($title)) {
-                        $href_tag_begin = html_writer::start_tag('a',
-                                array('class' => 'autolink', 'title' => $title,
-                                    'href' => $cm->url));
+                        // Added by Renaat
+                        if ($cm->modname === 'resource') {
+                            $href_tag_begin = html_writer::start_tag('a',
+                              array('class' => 'link',
+                                    'title' => $title,
+                                  'onclick' => 'window.open("' . $cm->url . '","_blank","' . $title . '","toolbar=0,scrollbars=0,location=0,statusbar=0,menubar=0,resizable=yes,width=600,height=400");return false;',
+                                   'target' => 'parent',
+                                     'href' => $cm->url)); 
+                        } else {
+                            $href_tag_begin = html_writer::start_tag('a',
+                                    array('class' => 'autolink', 'title' => $title, 'href' => $cm->url));
+                        }
+
                         self::$activitylist[$cm->id] = new filterobject($currentname, $href_tag_begin, '</a>', false, true);
                         if ($currentname != $entitisedname) {
                             // If name has some entity (&amp; &quot; &lt; &gt;) add that filter too. MDL-17545.

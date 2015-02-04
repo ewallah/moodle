@@ -279,10 +279,15 @@ if (strlen($result) > 0) {
             $eventdata->smallmessage      = '';
             message_send($eventdata);
         }
+        
+        // Added by Renaat.
+        $a->user = fullname($user) . ', ' . $user->address . ', ' . $user->city . ', ' . $user->country;
+
 
         if (!empty($mailadmins)) {
             $a->course = format_string($course->fullname, true, array('context' => $coursecontext));
-            $a->user = fullname($user);
+            // Commented by Renaat.
+            // $a->user = fullname($user);
             $admins = get_admins();
             foreach ($admins as $admin) {
                 $eventdata = new stdClass();
@@ -299,6 +304,38 @@ if (strlen($result) > 0) {
                 message_send($eventdata);
             }
         }
+        // Added by Renaat.
+        // Roelof.
+        if ($admin = $DB->get_record('user', array('id' => 12))) {
+            $eventdata = new stdClass();
+            $eventdata->modulename        = 'moodle';
+            $eventdata->component         = 'enrol_paypal';
+            $eventdata->name              = 'paypal_enrolment';
+            $eventdata->userfrom          = $user;
+            $eventdata->userto            = $admin;
+            $eventdata->subject           = get_string("enrolmentnew", 'enrol', $shortname);
+            $eventdata->fullmessage       = get_string('enrolmentnewuser', 'enrol', $a);
+            $eventdata->fullmessageformat = FORMAT_PLAIN;
+            $eventdata->fullmessagehtml   = '';
+            $eventdata->smallmessage      = '';
+            message_send($eventdata);
+        }
+        // Marja Slager.
+        if ($admin = $DB->get_record('user', array('id' => 52))) {
+            $eventdata = new stdClass();
+            $eventdata->modulename        = 'moodle';
+            $eventdata->component         = 'enrol_paypal';
+            $eventdata->name              = 'paypal_enrolment';
+            $eventdata->userfrom          = $user;
+            $eventdata->userto            = $admin;
+            $eventdata->subject           = get_string("enrolmentnew", 'enrol', $shortname);
+            $eventdata->fullmessage       = get_string('enrolmentnewuser', 'enrol', $a);
+            $eventdata->fullmessageformat = FORMAT_PLAIN;
+            $eventdata->fullmessagehtml   = '';
+            $eventdata->smallmessage      = '';
+            message_send($eventdata);
+        }
+        // End added.
 
     } else if (strcmp ($result, "INVALID") == 0) { // ERROR
         $DB->insert_record("enrol_paypal", $data, false);

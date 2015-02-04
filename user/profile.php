@@ -126,7 +126,9 @@ if (has_capability('moodle/user:viewhiddendetails', $context)) {
 }
 
 if (has_capability('moodle/site:viewuseridentity', $context)) {
-    $identityfields = array_flip(explode(',', $CFG->showuseridentity));
+    // Changed by Renaat
+    //$identityfields = array_flip(explode(',', $CFG->showuseridentity));
+    $identityfields = array_flip(explode(',', $CFG->showuseridentity . ',address'));
 } else {
     $identityfields = array();
 }

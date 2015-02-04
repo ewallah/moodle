@@ -153,8 +153,12 @@ $mygroupid = groups_get_activity_group($cm);
 $baseurl = new moodle_url('/mod/feedback/show_nonrespondents.php');
 $baseurl->params(array('id'=>$id, 'showall'=>$showall));
 
-$tablecolumns = array('userpic', 'fullname', 'status');
-$tableheaders = array(get_string('userpic'), get_string('fullnameuser'), get_string('status'));
+// changed by Renaat
+//$tablecolumns = array('userpic', 'fullname', 'status');
+$tablecolumns = array('userpic', 'fullname', 'timecreated', 'status');
+// changed by Renaat
+//$tableheaders = array(get_string('userpic'), get_string('fullnameuser'), get_string('status'));
+$tableheaders = array(get_string('userpic'), get_string('fullnameuser'), 'registered', get_string('status'));
 
 if (has_capability('moodle/course:bulkmessaging', $coursecontext)) {
     $tablecolumns[] = 'select';
@@ -234,7 +238,12 @@ if (!$students) {
         //userpicture and link to the profilepage
         $profile_url = $CFG->wwwroot.'/user/view.php?id='.$user->id.'&amp;course='.$course->id;
         $profilelink = '<strong><a href="'.$profile_url.'">'.fullname($user).'</a></strong>';
-        $data = array ($OUTPUT->user_picture($user, array('courseid'=>$course->id)), $profilelink);
+        // Modified by renaat
+        //$data = array ($OUTPUT->user_picture($user, array('courseid'=>$course->id)), $profilelink);
+        $data = array ($OUTPUT->user_picture($user, array('courseid'=>1)), $profilelink);
+        // added by Renaat   
+        $data[] = format_time(time() - $user->timecreated);
+
 
         if ($DB->record_exists('feedback_completedtmp', array('userid'=>$user->id))) {
             $data[] = get_string('started', 'feedback');

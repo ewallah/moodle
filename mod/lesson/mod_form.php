@@ -114,7 +114,8 @@ class mod_lesson_mod_form extends moodleform_mod {
 
         $mform->addElement('selectyesno', 'displayleft', get_string('displayleftmenu', 'lesson'));
         $mform->addHelpButton('displayleft', 'displayleftmenu', 'lesson');
-        $mform->setDefault('displayleft', 0);
+        // Modified by Renaat 0->1
+        $mform->setDefault('displayleft', 1);
 
         $options = array();
         for($i = 100; $i >= 0; $i--) {
@@ -233,7 +234,8 @@ class mod_lesson_mod_form extends moodleform_mod {
 
         $mform->addElement('selectyesno', 'modattempts', get_string('modattempts', 'lesson'));
         $mform->addHelpButton('modattempts', 'modattempts', 'lesson');
-        $mform->setDefault('modattempts', 0);
+        // Modified by Renaat 0->1
+        $mform->setDefault('modattempts', 1);
 
         $mform->addElement('selectyesno', 'review', get_string('displayreview', 'lesson'));
         $mform->addHelpButton('review', 'displayreview', 'lesson');
@@ -245,7 +247,8 @@ class mod_lesson_mod_form extends moodleform_mod {
         }
         $mform->addElement('select', 'maxattempts', get_string('maximumnumberofattempts', 'lesson'), $numbers);
         $mform->addHelpButton('maxattempts', 'maximumnumberofattempts', 'lesson');
-        $mform->setDefault('maxattempts', 1);
+        // Modified by Renaat 1->10
+        $mform->setDefault('maxattempts', 10);
 
         $defaultnextpages = array();
         $defaultnextpages[0] = get_string('normal', 'lesson');
@@ -270,7 +273,8 @@ class mod_lesson_mod_form extends moodleform_mod {
 
         $mform->addElement('selectyesno', 'practice', get_string('practice', 'lesson'));
         $mform->addHelpButton('practice', 'practice', 'lesson');
-        $mform->setDefault('practice', 0);
+        // Modified by Renaat 0->1
+        $mform->setDefault('practice', 1);
 
         $mform->addElement('selectyesno', 'custom', get_string('customscoring', 'lesson'));
         $mform->addHelpButton('custom', 'customscoring', 'lesson');
@@ -278,7 +282,8 @@ class mod_lesson_mod_form extends moodleform_mod {
 
         $mform->addElement('selectyesno', 'retake', get_string('retakesallowed', 'lesson'));
         $mform->addHelpButton('retake', 'retakesallowed', 'lesson');
-        $mform->setDefault('retake', 0);
+        // Modified by Renaat 0->1
+        $mform->setDefault('retake', 1);
 
         $options = array();
         $options[0] = get_string('usemean', 'lesson');

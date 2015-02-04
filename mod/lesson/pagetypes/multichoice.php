@@ -86,6 +86,8 @@ class lesson_page_type_multichoice extends lesson_page {
 
     public function display($renderer, $attempt) {
         global $CFG, $PAGE;
+        // Added by Renaat
+        echo $renderer->heading(format_string($this->properties->title), 3);
         $answers = $this->get_used_answers();
         shuffle($answers);
         $action = $CFG->wwwroot.'/mod/lesson/continue.php';
@@ -437,6 +439,16 @@ class lesson_page_type_multichoice extends lesson_page {
         }
         return $answerpage;
     }
+    
+    // Added by Renaat
+    protected function get_displayinmenublock() {
+        return true;
+    }
+    // Added by Renaat
+    protected function get_display() {
+        return true;
+    }
+
 }
 
 

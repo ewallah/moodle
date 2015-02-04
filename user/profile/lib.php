@@ -538,7 +538,8 @@ function profile_signup_fields($mform) {
             // Check if we change the categories.
             if (!isset($currentcat) || $currentcat != $field->categoryid) {
                  $currentcat = $field->categoryid;
-                 $mform->addElement('header', 'category_'.$field->categoryid, format_string($field->categoryname));
+                 //commented by Renaat
+                 //$mform->addElement('header', 'category_'.$field->categoryid, format_string($field->categoryname));
             }
             require_once($CFG->dirroot.'/user/profile/field/'.$field->datatype.'/field.class.php');
             $newfield = 'profile_field_'.$field->datatype;

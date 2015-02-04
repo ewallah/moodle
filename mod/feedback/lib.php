@@ -2950,7 +2950,9 @@ function feedback_send_email($cm, $feedback, $course, $userid) {
             $info->url = $CFG->wwwroot.'/mod/feedback/show_entries.php?'.
                             'id='.$cm->id.'&'.
                             'userid='.$userid.'&'.
-                            'do_show=showentries';
+                            // Modified by Renaat
+                            //'do_show=showentries';
+                             'do_show=showoneentry';
 
             $postsubject = $strcompleted.': '.$info->username.' -> '.$feedback->name;
             $posttext = feedback_send_email_text($info, $course);

@@ -33,9 +33,15 @@ require_once($CFG->dirroot . '/user/editlib.php');
 class login_signup_form extends moodleform {
     function definition() {
         global $USER, $CFG;
+        // Added by Renaat
+        if ($USER->id > 1) {
+            redirect ($CFG->wwwroot . '/login/index.php');
+        }
 
         $mform = $this->_form;
 
+        // Added by Renaat
+        $mform->addElement('static', 'Warning', '', 'Do not registrer more than once!');
         $mform->addElement('header', 'createuserandpass', get_string('createuserandpass'), '');
 
 
@@ -71,11 +77,19 @@ class login_signup_form extends moodleform {
             $mform->addRule($field, get_string($stringid), 'required', null, 'server');
         }
 
+        // Added by Renaat
+        $strrequired = get_string('required');
+        $mform->addElement('text', 'address', get_string('address'), 'maxlength="255" size="25"');
+        $mform->setType('address', PARAM_TEXT);
+        $mform->addRule('address', $strrequired, 'required', null, 'client');
+        
         $mform->addElement('text', 'city', get_string('city'), 'maxlength="120" size="20"');
         $mform->setType('city', PARAM_TEXT);
         if (!empty($CFG->defaultcity)) {
             $mform->setDefault('city', $CFG->defaultcity);
         }
+         // Added by Renaat
+        $mform->addRule('city', get_string('city'), 'required', null, 'server');
 
         $country = get_string_manager()->get_list_of_countries();
         $default_country[''] = get_string('selectacountry');
@@ -87,18 +101,33 @@ class login_signup_form extends moodleform {
         }else{
             $mform->setDefault('country', '');
         }
+        // Added by Renaat
+        $mform->addRule('country', get_string('country'), 'required', null, 'server');
+
+        // Moved by Renaat
+        profile_signup_fields($mform);
 
         if ($this->signup_captcha_enabled()) {
             $mform->addElement('recaptcha', 'recaptcha_element', get_string('recaptcha', 'auth'), array('https' => $CFG->loginhttps));
             $mform->addHelpButton('recaptcha_element', 'recaptcha', 'auth');
         }
 
-        profile_signup_fields($mform);
+        // Commented by Renaat
+        // profile_signup_fields($mform);
 
         if (!empty($CFG->sitepolicy)) {
             $mform->addElement('header', 'policyagreement', get_string('policyagreement'), '');
             $mform->setExpanded('policyagreement');
-            $mform->addElement('static', 'policylink', '', '<a href="'.$CFG->sitepolicy.'" onclick="this.target=\'_blank\'">'.get_String('policyagreementclick').'</a>');
+            // Changed by Renaat
+            //$mform->addElement('static', 'policylink', '', '<a href="'.$CFG->sitepolicy.'" onclick="this.target=\'_blank\'">'.get_String('policyagreementclick').'</a>');
+            $staticdoc = new DOMDocument();
+            $staticdoc->loadHTMLFile('/mnt/ips/data/staticpage/terms.html');
+            $html = $staticdoc->saveHTML();
+            $startcut = strpos($html, '<body>') + 6;
+            $stopcut = strpos($html, '</body>') - $startcut;
+            $html = substr($html, $startcut, $stopcut);
+            $mform->addElement('static', 'policylink', '', $html);
+
             $mform->addElement('checkbox', 'policyagreed', get_string('policyaccept'));
             $mform->addRule('policyagreed', get_string('policyagree'), 'required', null, 'server');
         }
