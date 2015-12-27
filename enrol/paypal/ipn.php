@@ -213,7 +213,7 @@ if (strlen($result) > 0) {
         }
         // MDL-41531
         $data->item_name = $course->fullname;
-        
+
         // ALL CLEAR !
 
         $DB->insert_record("enrol_paypal", $data);
