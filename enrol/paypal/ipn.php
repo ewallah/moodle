@@ -58,7 +58,7 @@ $data = new stdClass();
 
 foreach ($_POST as $key => $value) {
     $req .= "&$key=".urlencode($value);
-    $data->$key = $value;
+    $data->$key = fix_utf8($value);
 }
 
 $custom = explode('-', $data->custom);
@@ -211,7 +211,9 @@ if (strlen($result) > 0) {
             die;
 
         }
-
+        // MDL-41531
+        $data->item_name = $course->fullname;
+        
         // ALL CLEAR !
 
         $DB->insert_record("enrol_paypal", $data);
