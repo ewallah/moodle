@@ -211,7 +211,7 @@ if (strlen($result) > 0) {
             die;
 
         }
-        // MDL-41531
+        // MDL-41531.
         $data->item_name = $course->fullname;
 
         // ALL CLEAR !
