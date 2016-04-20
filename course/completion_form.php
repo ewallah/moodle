@@ -87,6 +87,9 @@ class course_completion_form extends moodleform {
 
         $activities = $completion->get_activities();
         if (!empty($activities)) {
+            if (!$completion->is_course_locked()) {
+                $this->add_checkbox_controller(1, null, null, 0);
+            }
 
             foreach ($activities as $activity) {
                 $params_a = array('moduleinstance' => $activity->id);
