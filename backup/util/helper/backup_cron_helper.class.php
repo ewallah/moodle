@@ -733,6 +733,9 @@ abstract class backup_cron_automated_helper {
         $where = "courseid = :courseid and timecreated > :since and crud <> 'r'";
         $params = array('courseid' => $courseid, 'since' => $since);
         foreach ($readers as $reader) {
+            if ($reader->get_name() === 'logstore_standard_log') {
+                $where .= " and target <> 'course_backup'";
+            }
             if ($reader->get_events_select_count($where, $params)) {
                 return true;
             }
