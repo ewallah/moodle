@@ -61,10 +61,6 @@ cache:
       - $HOME/.composer/cache
       - $HOME/.npm
 
-before_install:
-    # Avoid IPv6 default binding as service (causes redis not to start).
-    sudo service redis-server start --bind 127.0.0.1
-
 install:
     - >
         if [ "$DB" = 'mysqli' ];
@@ -93,9 +89,6 @@ install:
                 composer config github-oauth.github.com $GITHUB_APITOKEN;
                 echo 'auth.json' >> .git/info/exclude
             fi
-
-            #echo 'extension="redis.so"' > /tmp/redis.ini
-            #phpenv config-add /tmp/redis.ini
 
             # Install composer dependencies.
             # We need --no-interaction in case we hit API limits for composer. This causes it to fall back to a standard clone.
@@ -170,15 +163,7 @@ before_script:
           -e "/require_once/i \\\$CFG->phpunit_dataroot = '\/home\/travis\/roots\/phpunit';" \
           -e "/require_once/i \\\$CFG->phpunit_prefix = 'p_';" \
           config.php ;
-        # Redis cache store tests
-        #sed -i \
-        #  -e "/require_once/i \\define('TEST_CACHESTORE_REDIS_TESTSERVERS', '127.0.0.1');" \
-        #  config.php ;
-        # Redis session tests, but not for PHP 7.2 and up. See MDL-60978 for more info.
-        #redissession="define('TEST_SESSION_REDIS_HOST', '127.0.0.1');"
-        #sed -i \
-        #  -e "/require_once/i \\${redissession}" \
-        #  config.php ;
+        
 
         # Initialise PHPUnit for Moodle.
         php admin/tool/phpunit/cli/init.php
