@@ -18,16 +18,18 @@ env:
   - DB=pgsql MOODLE_BRANCH=master
 
 before_install:
-  - phpenv config-rm xdebug.ini
   - nvm install 8.9
   - nvm use 8.9
-  - cd ../..
-  - composer create-project -n --no-dev --prefer-dist blackboard-open-source/moodle-plugin-ci ci ^2
-  - export PATH="$(cd ci/bin; pwd):$(cd ci/vendor/bin; pwd):$PATH"
+  - cp config-dist.php config.php
+  - mkdir -p "$HOME"/roots/base
+  - sed -i -e "s%= 'moodle'%= 'travis_ci_test'%" -e "s%= 'password'%= ''%" config.php
+  - sed -i -e "s%http://example.com/moodle%https://localhost%" -e "s%/home/example/moodledata%/home/travis/roots/base%" config.php
+  - sed -i -e "s%= 'username'%= 'postgres'%" config.php
+  - psql -c 'CREATE DATABASE travis_ci_test;' -U postgres
+  - mkdir -p "$HOME"/roots/phpunit
+  - sed -i -e "/require_once/i \\\$CFG->phpunit_dataroot = '\/home\/travis\/roots\/phpunit';" -e "/require_once/i \\\$CFG->phpunit_prefix = 'p_';" config.php
 
 install:
-  - moodle-plugin-ci install
-  - cd build/moodle
   - php admin/tool/phpunit/cli/init.php
   - php admin/tool/phpunit/cli/util.php --buildcomponentconfigs
  
@@ -35,4 +37,5 @@ script:
   - vendor/bin/phpunit --coverage-text  --coverage-clover build/logs/clover.xml --configuration mod/forum
 
 after_success:
-  - php vendor/bin/coveralls -v
+  - composer create-project -n --no-dev --prefer-dist satooshi/php-coveralls _php_coveralls ^1
+  - _php_coveralls/bin/coveralls -v
