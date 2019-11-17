@@ -25,6 +25,8 @@ matrix:
       env: DB=pgsql MOODLE_BRANCH=MOODLE_36_STABLE
     - php: 7.2
       env: DB=pgsql MOODLE_BRANCH=MOODLE_37_STABLE
+    - php: 7.2
+      env: DB=pgsql MOODLE_BRANCH=MOODLE_38_STABLE
     - php: 7.3
       env: DB=pgsql MOODLE_BRANCH=master
 
@@ -43,8 +45,8 @@ before_install:
 install:
   - php admin/tool/phpunit/cli/init.php
   - php admin/tool/phpunit/cli/util.php --buildcomponentconfigs
- 
-script:
+
+  script:
   - vendor/bin/phpunit --coverage-text  --coverage-clover build/logs/clover.xml --configuration mod/forum
 
 after_success:
