@@ -15,15 +15,34 @@
 // along with Moodle.  If not, see <http://www.gnu.org/licenses/>.
 
 /**
- * Version information
+ * paygw_paypal upgrade script.
  *
  * @package    paygw_paypal
- * @copyright  2019 Shamim Rezaie <shamim@moodle.com>
+ * @copyright  2020 Renaat Debleu
  * @license    http://www.gnu.org/copyleft/gpl.html GNU GPL v3 or later
  */
 
 defined('MOODLE_INTERNAL') || die();
 
-$plugin->version   = 2020111200;        // The current plugin version (Date: YYYYMMDDXX).
-$plugin->requires  = 2020110300;        // Requires this Moodle version.
-$plugin->component = 'paygw_paypal';       // Full name of the plugin (used for diagnostics).
+/**
+ * Function to upgrade payment paypal gateway.
+ *
+ * @param int $oldversion the version we are upgrading from
+ * @return bool result
+ */
+function xmldb_paygw_paypal_upgrade($oldversion) {
+    global $DB;
+
+    $dbman = $DB->get_manager();
+
+    if ($oldversion < 2020110905) {
+        $table = new xmldb_table('paygw_paypal');
+        $oldkey = new xmldb_key('paymentid', XMLDB_KEY_FOREIGN, ['paymentid'], 'payment', ['id']);
+        if ($dbman->find_key_name($table, $oldkey)) {
+            $dbman->drop_key($table, $oldkey);
+            $newkey = new xmldb_key('paymentid', XMLDB_KEY_FOREIGN, ['paymentid'], 'payments', ['id']);
+            $dbman->add_key($table, $newkey);
+        }
+        upgrade_plugin_savepoint(true, 2020110905, 'paygw', 'paypal');
+    }
+}
