@@ -86,23 +86,23 @@ Feature: Users can edit the database templates
     And I set the following fields to these values:
       | Repeated entry | <span class="hideme">Nope</span>Yep! |
     And I click on "Save" "button" in the "sticky-footer" "region"
-    And I set the field "Templates tertiary navigation" to "CSS template"
+    And I set the field "Templates tertiary navigation" to "Custom CSS"
     And I set the following fields to these values:
-      | CSS template | .hideme {display: none;} |
+      | Custom CSS | .hideme {display: none;} |
     And I click on "Save" "button" in the "sticky-footer" "region"
     When I navigate to "Database" in current page administration
     Then I should not see "Nope"
     And I should see "Yep!"
 
   @javascript
-  Scenario: Edit Javascript template
+  Scenario: Edit Custom JavaScript
     Given I click on "Enable code editor" "checkbox"
     And I set the following fields to these values:
       | Repeated entry | <span id="hideme">Nope</span>Yep! |
     And I click on "Save" "button" in the "sticky-footer" "region"
-    And I set the field "Templates tertiary navigation" to "Javascript template"
+    And I set the field "Templates tertiary navigation" to "Custom JavaScript"
     And I set the following fields to these values:
-      | Javascript template | window.onload = () => document.querySelector('#hideme').style.display = 'none'; |
+      | Custom JavaScript | window.onload = () => document.querySelector('#hideme').style.display = 'none'; |
     And I click on "Save" "button" in the "sticky-footer" "region"
     When I navigate to "Database" in current page administration
     Then I should not see "Nope"
@@ -124,7 +124,7 @@ Feature: Users can edit the database templates
     When I navigate to "Templates" in current page administration
     And I set the field "Templates tertiary navigation" to "List view template"
     And I click on "Reset" "button" in the "sticky-footer" "region"
-    And I click on "Reset template" "button" in the "Reset template?" "dialogue"
+    And I click on "Reset" "button" in the "Reset template?" "dialogue"
     Then I should see "Template reset"
     And I navigate to "Database" in current page administration
     And I should not see "New header!"
@@ -132,3 +132,79 @@ Feature: Users can edit the database templates
     And I should not see "New footer!"
     And I should see "Student entry 1"
     And I should see "Some content 1"
+
+  @javascript
+  Scenario: Reset all database templates using the action menu
+    Given the following "mod_data > templates" exist:
+      | database | name            | content        |
+      | data1    | singletemplate  | Initial single |
+      | data1    | listtemplate    | Initial list   |
+      | data1    | addtemplate     | Initial add    |
+      | data1    | asearchtemplate | Initial search |
+    And I navigate to "Database" in current page administration
+    And I should see "Initial list"
+    And I should not see "Student entry 1"
+    And I should not see "Some content 1"
+    And I click on "Advanced search" "checkbox"
+    And I should see "Initial search"
+    And I set the field "View mode tertiary navigation" to "Single view"
+    And I should see "Initial single"
+    And I should not see "Student entry 1"
+    And I should not see "Some content 1"
+    And I click on "Add entry" "button"
+    And I should see "Initial add"
+    When I navigate to "Templates" in current page administration
+    And I click on "Actions" "button"
+    And I choose "Reset all templates" in the open action menu
+    And I click on "Reset" "button" in the "Reset all templates?" "dialogue"
+    Then I should see "All templates reset"
+    And I navigate to "Database" in current page administration
+    And I should not see "Initial list"
+    And I should see "Student entry 1"
+    And I should see "Some content 1"
+    And I click on "Advanced search" "checkbox"
+    And I should not see "Initial search"
+    And I set the field "View mode tertiary navigation" to "Single view"
+    And I should not see "Initial single"
+    And I should see "Student entry 1"
+    And I should see "Some content 1"
+    And I click on "Add entry" "button"
+    And I should not see "Initial add"
+
+  @javascript
+  Scenario: Reset all database templates using the reset template button
+    Given the following "mod_data > templates" exist:
+      | database | name            | content        |
+      | data1    | singletemplate  | Initial single |
+      | data1    | listtemplate    | Initial list   |
+      | data1    | addtemplate     | Initial add    |
+      | data1    | asearchtemplate | Initial search |
+    And I navigate to "Database" in current page administration
+    And I should see "Initial list"
+    And I should not see "Student entry 1"
+    And I should not see "Some content 1"
+    And I click on "Advanced search" "checkbox"
+    And I should see "Initial search"
+    And I set the field "View mode tertiary navigation" to "Single view"
+    And I should see "Initial single"
+    And I should not see "Student entry 1"
+    And I should not see "Some content 1"
+    And I click on "Add entry" "button"
+    And I should see "Initial add"
+    When I navigate to "Templates" in current page administration
+    And I click on "Reset" "button" in the "sticky-footer" "region"
+    And I click on "Reset all templates" "checkbox"
+    And I click on "Reset" "button" in the "Reset template?" "dialogue"
+    Then I should see "All templates reset"
+    And I navigate to "Database" in current page administration
+    And I should not see "Initial list"
+    And I should see "Student entry 1"
+    And I should see "Some content 1"
+    And I click on "Advanced search" "checkbox"
+    And I should not see "Initial search"
+    And I set the field "View mode tertiary navigation" to "Single view"
+    And I should not see "Initial single"
+    And I should see "Student entry 1"
+    And I should see "Some content 1"
+    And I click on "Add entry" "button"
+    And I should not see "Initial add"

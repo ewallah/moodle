@@ -2377,7 +2377,7 @@ function date_format_string($date, $format, $tz = 99) {
 
     date_default_timezone_set(core_date::get_user_timezone($tz));
 
-    if (strftime('%p', 0) === strftime('%p', HOURSECS * 18)) {
+    if (date('A', 0) === date('A', HOURSECS * 18)) {
         $datearray = getdate($date);
         $format = str_replace([
             '%P',
@@ -2388,7 +2388,7 @@ function date_format_string($date, $format, $tz = 99) {
         ], $format);
     }
 
-    $datestring = strftime($format, $date);
+    $datestring = core_date::strftime($format, $date);
     core_date::set_default_server_timezone();
 
     if ($localewincharset) {
@@ -6391,18 +6391,19 @@ function can_send_from_real_email_address($from, $user, $unused = null) {
  * @return string
  */
 function generate_email_signoff() {
-    global $CFG;
+    global $CFG, $OUTPUT;
 
     $signoff = "\n";
     if (!empty($CFG->supportname)) {
         $signoff .= $CFG->supportname."\n";
     }
-    if (!empty($CFG->supportemail)) {
-        $signoff .= $CFG->supportemail."\n";
+
+    $supportemail = $OUTPUT->supportemail(['class' => 'font-weight-bold']);
+
+    if ($supportemail) {
+        $signoff .= "\n" . $supportemail . "\n";
     }
-    if (!empty($CFG->supportpage)) {
-        $signoff .= $CFG->supportpage."\n";
-    }
+
     return $signoff;
 }
 

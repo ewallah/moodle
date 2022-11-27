@@ -48,8 +48,7 @@ $string['bigbluebuttondisablednotification_subject'] = 'BigBlueButton activity m
 $string['bigbluebuttondisablednotification'] = 'The BigBlueButton activity module has been disabled and any existing BigBlueButton course activities are currently not accessible. Prior to re-enabling this plugin, please ensure that you have read and accepted the <a href="{$a}" target="_blank">data processing agreement</a> with Blindside Networks Inc.';
 $string['cannotperformaction'] = 'Cannot perform action {$a} on this recording';
 $string['enablingbigbluebutton'] = 'Enabling BigBlueButton activity';
-$string['enablingbigbluebuttondpainfo'] = 'In order to meet your data protection obligations, prior to enabling this plugin, you may need to ensure that you have read and accepted the <a href="{$a}" target="_blank">data processing agreement</a> with Blindside Networks Inc.<br/>
-Please consult with your own privacy professionals for advice.';
+$string['enablingbigbluebuttondpainfo'] = 'In order to meet your data protection obligations, prior to enabling this plugin, you may need to ensure that you have read and accepted the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
 $string['indicator:cognitivedepth'] = 'BigBlueButton cognitive';
 $string['indicator:cognitivedepth_help'] = 'This indicator is based on the cognitive depth reached by the student in a BigBlueButton activity.';
 $string['indicator:socialbreadth'] = 'BigBlueButton social';
@@ -111,8 +110,8 @@ $string['completionengagementpollvotes'] = 'Poll votes';
 $string['completionengagementpollvotes_desc'] = 'Vote in polls {$a} time(s).';
 $string['completionengagementpollvotes_event_desc'] = 'Has answered {$a} poll vote(s)';
 $string['completionengagementemojis'] = 'Emojis';
-$string['completionengagementemojis_desc'] = 'Change {$a} times his/her emoji(s).';
-$string['completionengagementemojis_event_desc'] = 'Changed {$a} time his/her emoji(s)';
+$string['completionengagementemojis_desc'] = 'Change their emoji {$a} time(s).';
+$string['completionengagementemojis_event_desc'] = 'Changed their emoji {$a} time(s)';
 
 $string['completionengagement_desc'] = 'Engage in activities during the meeting.';
 $string['completionengagementgroup'] = 'Require participation';
@@ -132,8 +131,8 @@ $string['minutes'] = 'minutes';
 
 $string['config_dpa_note'] = 'Note: In order to meet your data protection obligations, before using a service provider for this plugin, you must ensure that you have read and accepted the service provider\'s data processing agreement. For the default free BigBlueButton service, this is the <a href="{$a}" target="_blank">Blindside Networks data processing agreement</a>. Please consult with your own privacy professionals for advice.';
 
-$string['config_guestaccess_enabled'] = 'Create guest access link for external guests.';
-$string['config_guestaccess_enabled_description'] = 'You can use the guest access link to invite external guests who do not have a Moodle account to this conference room.';
+$string['config_guestaccess_enabled'] = 'External guest access';
+$string['config_guestaccess_enabled_description'] = 'Allow users without an account on your site to access the room.';
 
 $string['config_general'] = 'General settings';
 $string['config_general_description'] = 'These settings are always used.';
@@ -221,9 +220,8 @@ $string['config_participant_description'] = 'These settings define the default r
 $string['config_participant_moderator_default'] = 'Moderator';
 $string['config_participant_moderator_default_description'] = 'This rule is used by default when a new room is added.';
 
-$string['config_poll_interval'] = 'Poll interval to refresh the room\'s status';
-$string['config_poll_interval_description'] = 'Poll interval to refresh the room\'s status. Please make sure that this value is
- no too low as it might have an impact on the remote server. It cannot be less than two seconds.';
+$string['config_poll_interval'] = 'Poll interval (in seconds) to refresh the room\'s status';
+$string['config_poll_interval_description'] = 'The poll interval must be at least 2 seconds. If necessary, you can lower the load on the remote server by increasing the interval.';
 
 $string['config_userlimit'] = 'User limit';
 $string['config_userlimit_description'] = 'These settings enable or disable options in the UI and also define default values for these options.';
@@ -302,43 +300,41 @@ $string['general_error_unable_connect'] = 'Unable to connect. Please check the u
 Details : {$a}';
 $string['general_error_no_answer'] = 'Empty response. Please check the url of the BigBlueButton server AND check to see if the BigBlueButton server is running.';
 $string['general_error_not_allowed_to_create_instances'] = 'User is not allowed to create any type of instance.';
-$string['general_error_not_found'] = 'Cannot find the BigBlueButton activity ({$a}).';
+$string['general_error_not_found'] = 'Cannot find the BigBlueButton activity with ID {$a}.';
 $string['general_error_cannot_create_meeting'] = 'Cannot create session.';
 $string['general_error_cannot_get_recordings'] = 'Cannot get recordings.';
 $string['guestaccess_add'] = 'Add guests';
-$string['guestaccess_add_no_id'] = 'No bigbluebutton instance ID provided.';
-$string['guestaccess_emails'] = 'Add guests emails';
-$string['guestaccess_emails_help'] = 'Emails of users you want to invite, separated by commas';
-$string['guestaccess_emails_invalidemail'] = 'The email {$a} is invalid, please correct it.';
+$string['guestaccess_add_no_id'] = 'No BigBlueButton instance ID provided.';
+$string['guestaccess_emails'] = 'Guest emails';
+$string['guestaccess_emails_help'] = 'A list of email addresses, separated by commas.';
+$string['guestaccess_emails_invalidemail'] = 'Invalid email: {$a}';
 $string['guestaccess_username'] = 'Guest username';
 $string['guestaccess_meeting_link'] = 'Meeting link';
 $string['guestaccess_meeting_password'] = 'Meeting password';
 $string['guestaccess_password'] = 'Password';
-$string['guestaccess_meeting_not_started'] = 'Sorry, the meeting has not started yet. Please try again later.';
+$string['guestaccess_meeting_not_started'] = 'The meeting has not yet started. Please come back later.';
 $string['guestaccess_meeting_invalid_password'] = 'Incorrect password.';
-$string['guestaccess_activitynotfound'] = 'The BigblueButton activity is not found for this access as guest. Contact your
-support.';
-$string['guestaccess_feature_disabled'] = 'Guest access: feature is disabled.';
+$string['guestaccess_activitynotfound'] = 'Activity not found.';
+$string['guestaccess_feature_disabled'] = 'Guest access disabled.';
 $string['guestaccess_title']  = 'Add guests to this meeting';
 $string['guestaccess_copy_link'] = 'Copy link';
 $string['guestaccess_copy_password'] = 'Copy password';
-$string['guestaccess_invite_success'] = 'An invitation will be sent to guest(s) {$a->emails} via email.';
-$string['guestaccess_invite_failure'] = 'Error {$a->errors} when inviting guests {$a->emails}, please contact your support.';
+$string['guestaccess_invite_success'] = 'An invitation will be sent to {$a->emails}.';
+$string['guestaccess_invite_failure'] = 'Error {$a->errors} when inviting {$a->emails}.';
 $string['guestaccess_join_meeting'] = 'Join meeting';
-$string['guest_invitation_subject'] = 'You have been invited to the session {$a->name} on {$a->course_fullname} !';
+$string['guest_invitation_subject'] = 'Invitation: {$a->name} session in {$a->course_fullname}';
 $string['guest_invitation_small_message'] = 'Hi,
 
-You have been invited as a guest to a BigblueButton session "{$a->name}" on "{$a->course_fullname}" course.
+You are invited to a BigBlueButton session {$a->name} in the course  {$a->course_fullname}.
 
-You can join the session by following the link here : {$a->guestjoinurl}.
-You will then be prompted for your name and the following password: "{$a->guestpassword}".
+Link: {$a->guestjoinurl}
+Password: {$a->guestpassword}
 
-If you need help, please contact {$a->sender}.
-';
+If you need help, please contact {$a->sender}.';
 $string['guest_invitation_full_message'] = 'Hi,
-<p>You have been invited as a guest to a BigblueButton session "{$a->name}" on "{$a->course_fullname}" course.</p>
-<p>You can join the session by <a href="{$a->guestjoinurl}"> following the link here</a>.
-You will then be prompted for your name and the following password: "{$a->guestpassword}".</p>
+<p>You are invited to a BigBlueButton session <strong>{$a->name}</strong> in the course  {$a->course_fullname}.</p>
+<p>Link: {$a->guestjoinurl}<br/>
+<p>Password: {$a->guestpassword}</p>
 <p>If you need help, please contact {$a->sender}.</p>';
 
 $string['index_confirm_end'] = 'Do you want to end the session?';
@@ -372,8 +368,8 @@ $string['mod_form_field_intro'] = 'Description';
 $string['mod_form_field_intro_help'] = 'A short description of the room.';
 $string['mod_form_field_duration_help'] = 'Setting the duration for a meeting will establish the maximum time for a meeting to keep alive before the recording finish';
 $string['mod_form_field_duration'] = 'Duration';
-$string['mod_form_field_guestallowed'] = 'Allow guest access in the meeting';
-$string['mod_form_field_mustapproveuser'] = 'User must be approved by moderators';
+$string['mod_form_field_guestallowed'] = 'Allow guest access';
+$string['mod_form_field_mustapproveuser'] = 'Guests joining must be admitted by a moderator';
 $string['mod_form_field_userlimit'] = 'User limit';
 $string['mod_form_field_userlimit_help'] = 'The maximum number of users allowed in a session. Set to 0 to allow an unlimited number of users.';
 $string['mod_form_field_name'] = 'Room name';
@@ -518,8 +514,7 @@ $string['view_message_conference_in_progress'] = 'The session is in progress.';
 $string['view_message_conference_has_ended'] = 'The session has ended.';
 $string['view_message_tab_close'] = 'This tab/window must be closed manually';
 $string['view_message_recordings_disabled'] = 'Recordings are disabled on the server. BigBlueButton activities of type \'Recordings only\' cannot be used.';
-$string['view_message_cron_disabled'] = 'The scheduled task to fetch pending recordings has not been run for a while.
- Please contact the site administrator with the following information: {$a}.';
+$string['view_message_cron_disabled'] = 'The list of recordings may not be up to date. Please contact the site administrator with the following information: {$a}';
 $string['view_message_importrecordings_disabled'] = 'Import recording links is disabled on the server.';
 
 $string['view_groups_selection_warning'] = 'There is a room for each group and you have access to more than one. Be sure to select the correct one.';

@@ -83,6 +83,21 @@ class action_bar {
     }
 
     /**
+     * Generate the output for the action bar in the field mappings page.
+     *
+     * @return string The HTML code for the action bar.
+     */
+    public function get_fields_mapping_action_bar(): string {
+        global $PAGE;
+
+        $renderer = $PAGE->get_renderer('mod_data');
+        $fieldsactionbar = new fields_mappings_action_bar($this->id);
+
+        $data = $fieldsactionbar->export_for_template($renderer);
+        return $renderer->render_from_template('mod_data/fields_action_bar', $data);
+    }
+
+    /**
      * Generate the output for the create a new field action menu.
      *
      * @return \action_menu Action menu to create a new field
@@ -178,7 +193,20 @@ class action_bar {
         $selectmenu->set_label(get_string('templatesnavigation', 'mod_data'), ['class' => 'sr-only']);
 
         $renderer = $PAGE->get_renderer('mod_data');
+
         $presetsactions = $this->get_presets_actions_select(false);
+
+        // Reset all templates action.
+        $resetallurl = new moodle_url($this->currenturl);
+        $resetallurl->param('action', 'resetalltemplates');
+        $presetsactions->add(new \action_menu_link(
+            $resetallurl,
+            null,
+            get_string('resetalltemplates', 'mod_data'),
+            false,
+            ['data-action' => 'resetalltemplates', 'data-dataid' => $this->id]
+        ));
+
         $templatesactionbar = new templates_action_bar($this->id, $selectmenu, null, null, $presetsactions);
 
         return $renderer->render_templates_action_bar($templatesactionbar);

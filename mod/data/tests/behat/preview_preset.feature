@@ -34,7 +34,7 @@ Feature: Users can preview presets
     And I choose "Publish preset on this site" in the open action menu
     And I set the field "Name" to "Saved preset by teacher1"
     And I set the field "Description" to "Behat test preset"
-    And I click on "Save" "button" in the "Save all fields and templates as preset" "dialogue"
+    And I click on "Save" "button" in the "Save all fields and templates and publish as preset on this site" "dialogue"
     When I follow "Presets"
     And I click on "Saved preset by teacher1" "link"
     # Check list template preview fields.
@@ -82,7 +82,7 @@ Feature: Users can preview presets
     And I choose "Publish preset on this site" in the open action menu
     And I set the field "Name" to "Saved preset by teacher1"
     And I set the field "Description" to "Behat test preset"
-    And I click on "Save" "button" in the "Save all fields and templates as preset" "dialogue"
+    And I click on "Save" "button" in the "Save all fields and templates and publish as preset on this site" "dialogue"
     When I follow "Presets"
     And I click on "Saved preset by teacher1" "link"
     And I set the field "Templates tertiary navigation" to "Single view template"
@@ -157,9 +157,9 @@ Feature: Users can preview presets
     And I choose "Publish preset on this site" in the open action menu
     And I set the field "Name" to "Saved preset by teacher1"
     And I set the field "Description" to "Behat test preset"
-    And I click on "Save" "button" in the "Save all fields and templates as preset" "dialogue"
+    And I click on "Save" "button" in the "Save all fields and templates and publish as preset on this site" "dialogue"
     When I follow "Presets"
     And I click on "Saved preset by teacher1" "link"
     And I click on "Use this preset" "button"
-    Then I should see "Field mappings"
+    Then I should see "Preset applied"
     And I should see "My URL field"
