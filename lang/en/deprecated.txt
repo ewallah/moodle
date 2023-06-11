@@ -75,3 +75,6 @@ type_contentbank,core_plugin
 type_contentbank_plural,core_plugin
 missingversionfile,core_webservice
 cannotgetcoursecontents,core_webservice
+HRK,core_currencies
+LTL,core_currencies
+LVL,core_currencies
