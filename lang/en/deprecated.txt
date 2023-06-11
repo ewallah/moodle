@@ -146,3 +146,6 @@ availablelicenses,core_admin
 managelicenses,core_admin
 userfilterplaceholder,core
 sitebackpackverify,core_badges
+HRK,core_currencies
+LTL,core_currencies
+LVL,core_currencies
