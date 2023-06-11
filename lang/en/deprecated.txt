@@ -142,3 +142,6 @@ msnid,core
 configenableactivitychooser,core_admin
 enableactivitychooser,core_admin
 coursepreferences,core
+HRK,core_currencies
+LTL,core_currencies
+LVL,core_currencies
