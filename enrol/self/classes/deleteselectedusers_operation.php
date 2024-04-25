@@ -61,7 +61,7 @@ class enrol_self_deleteselectedusers_operation extends enrol_bulk_enrolment_oper
      * @return enrol_self_deleteselectedusers_form
      */
     public function get_form($defaultaction = null, $defaultcustomdata = null) {
-        if (!array($defaultcustomdata)) {
+        if (!is_array($defaultcustomdata)) {
             $defaultcustomdata = array();
         }
         $defaultcustomdata['title'] = $this->get_title();
