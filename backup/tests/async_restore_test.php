@@ -125,7 +125,7 @@ class async_restore_test extends \advanced_testcase {
 
         // Execute adhoc task.
         $now = time();
-        $task = \core\task\manager::get_next_adhoc_task($now);
+        $task = \core\task\manager::get_next_adhoc_task($now, true, \core\task\asynchronous_restore_task::class);
         $this->assertInstanceOf('\\core\\task\\asynchronous_restore_task', $task);
         $task->execute();
         \core\task\manager::adhoc_task_complete($task);
@@ -230,7 +230,7 @@ class async_restore_test extends \advanced_testcase {
 
         // Execute adhoc task.
         $now = time();
-        $task = \core\task\manager::get_next_adhoc_task($now);
+        $task = \core\task\manager::get_next_adhoc_task($now, true, \core\task\asynchronous_restore_task::class);
         $this->assertInstanceOf('\\core\\task\\asynchronous_restore_task', $task);
         $task->execute();
         \core\task\manager::adhoc_task_complete($task);
@@ -251,7 +251,7 @@ class async_restore_test extends \advanced_testcase {
 
         // Execute adhoc task.
         $now = time();
-        $task = \core\task\manager::get_next_adhoc_task($now);
+        $task = \core\task\manager::get_next_adhoc_task($now, true, \core\task\asynchronous_restore_task::class);
         $this->assertInstanceOf('\\core\\task\\asynchronous_restore_task', $task);
         $task->execute();
         \core\task\manager::adhoc_task_complete($task);
