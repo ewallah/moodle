@@ -7488,4 +7488,19 @@ class courselib_test extends advanced_testcase {
         $course = get_course($course->id);
         $this->assertEquals($course->fullname, $data->fullname);
     }
+
+
+    /**
+     * Test reset course without grades
+     */
+    public function test_reset_course_without_grades(): void {
+        $this->resetAfterTest();
+        $course = $this->getDataGenerator()->create_course();
+        $resetdata = new \stdClass();
+        $resetdata->id = $course->id;
+        $resetdata->reset_gradebook_grades = true;
+        reset_course_userdata($resetdata);
+        $this->assertDebuggingNotCalled();
+    }
 }
+
