@@ -1592,9 +1592,10 @@ function grade_course_reset($courseid) {
         $grade_item->delete_all_grades('reset');
     }
 
-    //refetch all grades
-    grade_grab_course_grades($courseid);
-
+    if ($gradeitems = grade_item::fetch_all(['courseid' => $courseid])) {
+        foreach ($gradeitems as $gid => $gradeitem) {
+            $gradeitem->delete_all_grades('reset');
+        }
     // recalculate all grades
     grade_regrade_final_grades($courseid);
     return true;

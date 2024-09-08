@@ -7318,4 +7318,19 @@ class courselib_test extends advanced_testcase {
         // The download course content value has changed, it should return true in this case.
         $this->assertTrue(set_downloadcontent($page->cmid, DOWNLOAD_COURSE_CONTENT_ENABLED));
     }
+
+
+    /**
+     * Test reset course without grades
+     */
+    public function test_reset_course_without_grades(): void {
+        $this->resetAfterTest();
+        $course = $this->getDataGenerator()->create_course();
+        $resetdata = new \stdClass();
+        $resetdata->id = $course->id;
+        $resetdata->reset_gradebook_grades = true;
+        reset_course_userdata($resetdata);
+        $this->assertDebuggingNotCalled();
+    }
 }
+
