@@ -1596,6 +1596,7 @@ function grade_course_reset($courseid) {
         foreach ($gradeitems as $gid => $gradeitem) {
             $gradeitem->delete_all_grades('reset');
         }
+        }
     }
 
     //refetch all grades
