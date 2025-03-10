@@ -173,3 +173,9 @@ groupevent,core_calendar
 tt_deleteevent,core_calendar
 tt_editevent,core_calendar
 userevent,core_calendar
+CUC,core_currencies
+HRK,core_currencies
+LTL,core_currencies
+LVL,core_currencies
+SLL,core_currencies
+
