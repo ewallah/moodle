@@ -84,7 +84,7 @@ class notification {
 
         // Add the notification directly to the session.
         // This will either be fetched in the header, or by JS in the footer.
-        if (!isset($SESSION->notifications) || !array($SESSION->notifications)) {
+        if (!isset($SESSION->notifications) || !is_array($SESSION->notifications)) {
             // Initialise $SESSION if necessary.
             if (!is_object($SESSION)) {
                 $SESSION = new stdClass();
